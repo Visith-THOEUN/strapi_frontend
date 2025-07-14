@@ -1,6 +1,6 @@
 // script.js
 
-const STRAPI_API_URL = "http://localhost:1337/api"; // កំណត់ API URL របស់ Strapi Backend
+const STRAPI_API_URL = "https://my-strapi-backend-service.onrender.com/api"; // កំណត់ API URL របស់ Strapi Backend
 const appRoot = document.getElementById("app-root"); // ទទួលបាន Element ដែលត្រូវបង្ហាញមាតិកា
 
 /**
