@@ -1,0 +1,147 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.article-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.article-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.article-card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.article-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.article-card a {
+    text-decoration: none;
+    color: #333;
+}
+
+.article-card a:hover {
+    color: #007bff;
+}
+
+.article-details {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.article-details img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.article-details h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.article-details .meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.article-details .content p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.article-details .categories,
+.article-details .tags {
+    margin-top: 1.5rem;
+}
+
+.article-details .category-tag,
+.article-details .tag-item {
+    display: inline-block;
+    background-color: #e0e7ff; /* light blue */
+    color: #3f51b5; /* darker blue */
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.article-details .tag-item {
+    background-color: #e6ffed; /* light green */
+    color: #28a745; /* darker green */
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #333;
+    color: #fff;
+    margin-top: 2rem;
+}
