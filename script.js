@@ -50,9 +50,7 @@ async function renderArticles() {
     const shortDescription = attrs.shortDescription || "";
     const authorName =
       attrs.author?.data?.attributes?.name || attrs.author?.name || "មិនស្គាល់";
-    const featuredImageUrl = attrs.featuredImage?.url
-      ? `${STRAPI_API_URL.replace("/api", "")}${attrs.featuredImage.url}`
-      : "https://via.placeholder.com/400x200.png?text=No+Image";
+    const featuredImageUrl = attrs.featuredImage?.url ? attrs.featuredImage.url : "https://via.placeholder.com/400x200.png?text=No+Image";
 
     const categories =
       attrs.categories?.data
@@ -235,9 +233,7 @@ async function renderSingleArticle(slug) {
   const publishedDate = attrs.publishedAt
     ? new Date(attrs.publishedAt).toLocaleDateString("km-KH")
     : "";
-  const featuredImageUrl = attrs.featuredImage?.url
-    ? `${STRAPI_API_URL.replace("/api", "")}${attrs.featuredImage.url}`
-    : "https://via.placeholder.com/800x400.png?text=No+Image";
+  const featuredImageUrl = attrs.featuredImage?.url ? attrs.featuredImage.url : "https://via.placeholder.com/800x400.png?text=No+Image";
 
   const categories =
     attrs.categories
