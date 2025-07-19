@@ -92,6 +92,9 @@ function renderRichText(contentBlocks) {
       case "paragraph":
         element = document.createElement("p");
         break;
+      case "text":
+        element = document.createTextNode(block.text);
+        break;
       case "heading":
         // Strapi's heading blocks have a 'level' property (e.g., 1 for h1, 2 for h2)
         element = document.createElement(`h${block.level}`);
@@ -162,7 +165,8 @@ function renderRichText(contentBlocks) {
           // Handle list items specifically within a list context
           const li = document.createElement("li");
           // Recursively render children of the list item
-          li.appendChild(renderRichText([child])); // Pass as an array for consistent processing
+          // li.appendChild(renderRichText(child.children)); 
+          li.innerHTML = renderRichText(child.children);
           childNode = li;
         } else {
           console.warn(`Unknown child type: ${child.type}. Skipping.`);
