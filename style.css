@@ -145,3 +145,112 @@ footer {
     color: #fff;
     margin-top: 2rem;
 }
+
+/* Dropdown menu styles */
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.menu > li {
+    position: relative;
+    margin-right: 20px;
+}
+.menu > li > a {
+    text-decoration: none;
+    padding: 8px 16px;
+    display: block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background: #fff;
+    min-width: 160px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 100;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content li a {
+    padding: 8px 16px;
+    color: #333;
+    display: block;
+    text-decoration: none;
+}
+.dropdown-content li a:hover {
+    background: #f0f0f0;
+}
+
+/* Parallel animation for header */
+.animated-header {
+    background: linear-gradient(90deg, #f8fafc 0%, #e0e7ef 100%);
+    animation: slideBg 3s linear infinite;
+}
+@keyframes slideBg {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Slideshow styles */
+.slideshow-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 2rem auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    background: #fff;
+}
+.slide {
+    display: none;
+    position: relative;
+}
+.slide img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+.caption {
+    position: absolute;
+    bottom: 24px;
+    left: 32px;
+    color: #fff;
+    background: rgba(0,0,0,0.4);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1.3rem;
+}
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 2rem;
+    border-radius: 0 3px 3px 0;
+    background: rgba(0,0,0,0.3);
+    user-select: none;
+    z-index: 10;
+    transition: background 0.2s;
+}
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+.prev:hover, .next:hover {
+    background: rgba(0,0,0,0.6);
+}
+.fade {
+    animation: fadeEffect 1s;
+}
+@keyframes fadeEffect {
+    from {opacity: .4}
+    to {opacity: 1}
+}

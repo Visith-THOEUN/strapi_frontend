@@ -152,7 +152,7 @@ function renderRichText(contentBlocks) {
           const a = document.createElement("a");
           a.href = child.url;
           a.target = "_blank"; // Open links in a new tab
-          // Recursively render children of the link (usually text)
+          // Recursively render children of the link
           if (child.children && child.children.length > 0) {
             child.children.forEach((linkChild) => {
               if (linkChild.type === "text") {
@@ -303,3 +303,87 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 3. កំណត់ Event Listener សម្រាប់ពេល URL Hash ផ្លាស់ប្តូរ ដើម្បីដំណើរការ Routing ឡើងវិញ។
 window.addEventListener("hashchange", handleRoute);
+
+// Slideshow logic
+let slideIndex = 0;
+function showSlides(n) {
+    const slides = document.querySelectorAll('.slide');
+    if (slides.length === 0) return;
+    if (n >= slides.length) slideIndex = 0;
+    if (n < 0) slideIndex = slides.length - 1;
+    slides.forEach((slide, i) => {
+        slide.style.display = (i === slideIndex) ? 'block' : 'none';
+    });
+}
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+document.addEventListener('DOMContentLoaded', () => {
+    showSlides(slideIndex);
+    const prev = document.querySelector('.slideshow-container .prev');
+    const next = document.querySelector('.slideshow-container .next');
+    if (prev && next) {
+        prev.addEventListener('click', () => plusSlides(-1));
+        next.addEventListener('click', () => plusSlides(1));
+    }
+    // Optional: auto slide
+    setInterval(() => {
+        plusSlides(1);
+    }, 5000);
+});
+
+async function fetchSlides() {
+    // Change 'slides' to your Strapi collection name for slideshow images
+    try {
+        const response = await fetch(`${STRAPI_API_URL}/slides?populate=*`);
+        if (!response.ok) throw new Error('Failed to fetch slides');
+        const data = await response.json();
+        return data.data; // Strapi v4 returns array in data
+    } catch (error) {
+        console.error('Error fetching slides:', error);
+        return [];
+    }
+}
+
+async function renderSlideshow() {
+    const slideshowContainer = document.querySelector('.slideshow-container');
+    if (!slideshowContainer) return;
+
+    const slides = await fetchSlides();
+    if (slides.length === 0) {
+        slideshowContainer.innerHTML = '<p>មិនមានរូបភាពសម្រាប់ Slideshow ទេ</p>';
+        return;
+    }
+
+    let slidesHtml = '';
+    slides.forEach((slide, i) => {
+        const attrs = slide.attributes ? slide.attributes : slide;
+        // Adjust path to image according to your Strapi media structure
+        const imgUrl = attrs.image?.url || attrs.image?.data?.attributes?.url || 'https://via.placeholder.com/1200x400?text=No+Image';
+        const caption = attrs.caption || `Slide ${i + 1}`;
+        slidesHtml += `
+            <div class="slide fade">
+                <img src="${imgUrl}" alt="Slide ${i + 1}">
+                <div class="caption">${caption}</div>
+            </div>
+        `;
+    });
+    slidesHtml += `<a class="prev">&#10094;</a><a class="next">&#10095;</a>`;
+    slideshowContainer.innerHTML = slidesHtml;
+
+    // Re-initialize slideshow logic
+    slideIndex = 0;
+    showSlides(slideIndex);
+    const prev = slideshowContainer.querySelector('.prev');
+    const next = slideshowContainer.querySelector('.next');
+    if (prev && next) {
+        prev.addEventListener('click', () => plusSlides(-1));
+        next.addEventListener('click', () => plusSlides(1));
+    }
+}
+
+// Call renderSlideshow when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    renderSlideshow();
+    // ...existing code...
+});
